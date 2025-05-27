@@ -1,0 +1,39 @@
+services:
+  db:
+    container_name: pg_db
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: inventorymanagement
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    depends_on:
+      - db
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root@root.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    restart: unless-stopped
+  
+  nodeinventorybackend:
+    container_name: nodeinventorybackend
+    build: .
+    depends_on:
+      - db
+    ports:
+      - '8007:8007'
+    env_file:
+      - .env
+
+
+volumes:
+  postgres-data:

@@ -12,7 +12,7 @@ export function serverInitialization(app:Express){
     app.get("/",(req: Request,res: Response)=>{
         res.status(200).json({
             data:"Inventory Management",
-            success:false
+            success:true
         });
     })
 }
