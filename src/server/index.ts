@@ -1,4 +1,4 @@
-import { env } from "config/env.config";
+import { env } from "../config/env.config";
 import {Express, Request, Response} from "express";
 
 const port = env.PORT;
