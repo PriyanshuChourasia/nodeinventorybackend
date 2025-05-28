@@ -8,9 +8,12 @@ RUN npm ci
 
 COPY . .
 
-EXPOSE 8007
-
+COPY .env .env
 
 RUN npx prisma generate
+
+RUN npm run seed
+
+EXPOSE 8007
 
 CMD [ "npm","run","dev" ]
